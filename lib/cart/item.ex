@@ -8,14 +8,14 @@ defmodule Cart.Item do
     schema "items" do
         field :name, :string
         field :price, :decimal, precision: 12, scale: 2
-        has_many: invoice_items, InvoiceItem
+        has_many :invoice_items, InvoiceItem
 
         timestamps()
     end
 
-    @field ~w(name price)
+    @fields ~w(name price)
 
-    def changeset(data, params || %{}) do
+    def changeset(data, params \\ %{}) do
         data
         |> cast(params, @fields)
         |> validate_required([:name, :price])
